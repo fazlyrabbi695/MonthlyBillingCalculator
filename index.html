@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monthly Billing Calculator</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+</head>
+<body>
+    <div class="container">
+        <div class="language-selector">
+            <button class="lang-btn active" data-lang="en">
+                <i class="fas fa-globe-americas"></i>
+                English
+            </button>
+            <button class="lang-btn" data-lang="bn">
+                <i class="fas fa-globe-asia"></i>
+                বাংলা
+            </button>
+        </div>
+        <div class="user-info">
+            <div class="user-input">
+                <label for="userName">User Name:</label>
+                <input type="text" id="userName" placeholder="Enter your name" required>
+            </div>
+            <button onclick="saveUserName()" class="save-name-btn">Save Name</button>
+        </div>
+
+        <h1 class="main-title">Monthly Billing Calculator</h1>
+        
+        <div class="month-selector">
+            <label for="monthYear" class="month-label">Select Month:</label>
+            <input type="month" id="monthYear" required>
+        </div>
+
+        <div class="received-funds">
+            <h2>Money Received from Head Office</h2>
+            <div class="received-form">
+                <div class="previous-balance">
+                    <label for="previousBalance">Previous Month's Balance:</label>
+                    <div class="balance-input">
+                        <input type="number" id="previousBalance" placeholder="Enter previous balance">
+                        <button onclick="addPreviousBalance()" class="add-previous">Add Previous Balance</button>
+                    </div>
+                </div>
+                <div class="received-input">
+                    <label for="receivedDate">Date:</label>
+                    <input type="date" id="receivedDate" required>
+                </div>
+                <div class="received-input">
+                    <label for="receivedAmount">Amount:</label>
+                    <input type="number" id="receivedAmount" placeholder="Enter amount" required>
+                </div>
+                <button onclick="addReceivedMoney()" class="add-received">Add Received Money</button>
+            </div>
+            <div class="received-list">
+                <h3>Received Money History</h3>
+                <div id="receivedHistory"></div>
+                <div class="received-summary">
+                    <div class="summary-item">
+                        <span>Total Received:</span>
+                        <span id="totalReceived">৳0.00</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Total Expenses:</span>
+                        <span id="totalExpenses">৳0.00</span>
+                    </div>
+                    <div class="summary-item balance">
+                        <span>Balance:</span>
+                        <span id="currentBalance">৳0.00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="expense-form">
+            <div class="header-info">
+                <div class="expense-item">
+                    <label for="date">Date:</label>
+                    <input type="date" id="date" required>
+                </div>
+            </div>
+
+            <div class="expense-entries" id="expenseEntries">
+                <div class="expense-entry">
+                    <div class="expense-item">
+                        <label for="route">Travel Route:</label>
+                        <input type="text" class="route" placeholder="e.g., Sylhet to Moulvibazar (Bus)">
+                        <input type="number" class="amount" placeholder="Amount">
+                        <button type="button" class="remove-entry" onclick="removeEntry(this)">×</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="buttons-section">
+                <button onclick="addNewEntry()" class="add-entry">+ Add Route</button>
+                <button onclick="addLunchBill()" class="add-lunch">+ Lunch Bill</button>
+                <button onclick="addMobileBill()" class="add-mobile">+ Mobile Bill</button>
+                <button onclick="addRentBill()" class="add-rent">+ House Rent Bill</button>
+                <button onclick="addOtherBill()" class="add-other">+ Other Bill</button>
+            </div>
+
+            <div class="total-section">
+                <h2>Daily Total: <span id="totalAmount">0.00</span></h2>
+            </div>
+
+            <div class="form-buttons">
+                <button onclick="saveDaily()" class="save-button">Save Day's Expenses</button>
+            </div>
+        </div>
+
+        <div class="monthly-summary">
+            <h2>Monthly Summary</h2>
+            <div class="monthly-stats">
+                <div class="stat-item">
+                    <span class="stat-label">Total Days:</span>
+                    <span id="totalDays">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Monthly Total:</span>
+                    <span id="monthlyTotal">৳0.00</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="saved-expenses" id="savedExpenses">
+            <h2>Saved Daily Expenses</h2>
+            <div class="saved-entries"></div>
+        </div>
+
+        <div class="buttons">
+            <button onclick="exportToExcel()" class="export-button">Export Monthly Report</button>
+            <button onclick="clearMonth()" class="clear-button">Clear Month</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <footer class="copyright">
+        &copy; 2025 Fazly Rabbi
+    </footer>
+</body>
+</html>
