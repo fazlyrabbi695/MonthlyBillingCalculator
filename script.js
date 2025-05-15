@@ -501,7 +501,7 @@ function updateMonthlyView() {
     const dateInput = document.getElementById('date');
     const [year, month] = selectedMonth.split('-');
     dateInput.min = `${selectedMonth}-01`;
-    dateInput.max = new Date(year, month, 0).toISOString().split('T')[0];
+    dateInput.max = new Date(year, month, 0).toISOString().split('T')[1];
 
     updateReceivedMoneyHistory();
 }
